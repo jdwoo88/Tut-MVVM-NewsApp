@@ -3,6 +3,7 @@ package com.jwoo.newsapp.ui
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.jwoo.newsapp.models.Article
 import com.jwoo.newsapp.models.NewsResponse
 import com.jwoo.newsapp.respository.NewsRepository
 import com.jwoo.newsapp.util.Resource
@@ -50,5 +51,15 @@ class NewsViewModel(val newsRepository: NewsRepository) : ViewModel() {
         }
 
         return Resource.Error(response.message())
+    }
+
+    fun saveArticle(article: Article) = viewModelScope.launch {
+        newsRepository.upsert(article)
+    }
+
+    fun getSavedNews() = newsRepository.getSaveNews()
+
+    fun deleteArticle(article: Article) = viewModelScope.launch {
+        newsRepository.deleteArticle(article)
     }
 }
