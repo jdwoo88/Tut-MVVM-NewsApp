@@ -6,6 +6,7 @@ import android.view.View
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jwoo.newsapp.R
 import com.jwoo.newsapp.adapters.NewsAdapter
@@ -31,6 +32,16 @@ class SearchNewsFragment : Fragment(R.layout.fragment_search_news) {
 
         setupRecyclerView()
 
+        newsAdapter.setOnitemClickListerner { article ->
+            val bundle = Bundle().apply {
+                putSerializable("article", article)
+            }
+            findNavController().navigate(
+                R.id.action_searchNewsFragment_to_articleFragment,
+                bundle
+            )
+        }
+
         var job: Job? = null
         etSearch.addTextChangedListener { editable ->
             job?.cancel()
@@ -39,8 +50,7 @@ class SearchNewsFragment : Fragment(R.layout.fragment_search_news) {
                 editable?.let {
                     if (editable.toString().isNotEmpty()) {
                         viewModel.searchNews(editable.toString().trim())
-                    }
-                    else {
+                    } else {
                         viewModel.searchNews("*")
                     }
                 }
