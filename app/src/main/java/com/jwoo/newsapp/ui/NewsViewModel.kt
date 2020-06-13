@@ -98,7 +98,7 @@ class NewsViewModel(val app: Application, val newsRepository: NewsRepository) :
         } catch (t: Throwable) {
             when (t) {
                 is IOException -> breakingNews.postValue(Resource.Error("Network Failure"))
-                else -> breakingNews.postValue(Resource.Error("Conversion Error"))
+                else -> breakingNews.postValue(Resource.Error(t.message.toString()))
             }
         }
     }
@@ -115,7 +115,7 @@ class NewsViewModel(val app: Application, val newsRepository: NewsRepository) :
         } catch (t: Throwable) {
             when (t) {
                 is IOException -> searchNews.postValue(Resource.Error("Network Failure"))
-                else -> searchNews.postValue(Resource.Error("Conversion Error"))
+                else -> searchNews.postValue(Resource.Error(t.message.toString()))
             }
         }
     }
