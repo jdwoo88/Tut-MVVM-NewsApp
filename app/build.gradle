@@ -17,6 +17,15 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -45,7 +54,8 @@ dependencies {
     // Room
     implementation "androidx.room:room-runtime:2.2.5"
     kapt "androidx.room:room-compiler:2.2.5"
-    implementation "androidx.room:room-ktx:2.2.5" // Kotlin Extensions and Coroutines support for Room
+    implementation "androidx.room:room-ktx:2.2.5"
+    // Kotlin Extensions and Coroutines support for Room
 
     // https://github.com/Kotlin/kotlinx.coroutines
     // Coroutines
@@ -57,7 +67,8 @@ dependencies {
     // Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
-    implementation "com.squareup.okhttp3:logging-interceptor:4.7.2" // https://github.com/square/okhttp/tree/master/okhttp-logging-interceptor
+    implementation "com.squareup.okhttp3:logging-interceptor:4.7.2"
+    // https://github.com/square/okhttp/tree/master/okhttp-logging-interceptor
 
     // https://developer.android.com/jetpack/androidx/releases/navigation
     // Navigation Components
